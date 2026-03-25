@@ -1,0 +1,86 @@
+---
+interface Props {
+  id: string;
+  label: string;
+  showProBadge?: boolean;
+  title: string;
+  description: string;
+  features: string[];
+  reverse?: boolean;
+  callout?: string;
+  calloutSource?: string;
+}
+
+const { id, label, showProBadge = false, title, description, features, reverse = false, callout, calloutSource } = Astro.props;
+---
+
+<section class:list={['studio-section', { reverse }]} id={id}>
+  <div class="studio-text">
+    <div class="section-label reveal">
+      <span>{label}</span>{showProBadge && <span class="pro-badge">Pro</span>}
+    </div>
+    <h2 class="section-title reveal"><Fragment set:html={title} /></h2>
+    <p class="studio-desc reveal">{description}</p>
+    <ul class="studio-features reveal">
+      {features.map(f => <li>{f}</li>)}
+    </ul>
+    {callout && (
+      <div class="studio-callout reveal">
+        <p>&ldquo;{callout}&rdquo;</p>
+        {calloutSource && <span class="callout-source">{calloutSource}</span>}
+      </div>
+    )}
+  </div>
+  <div class="studio-visual reveal">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .studio-section {
+    padding: 80px 40px; max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .studio-section.reverse .studio-text { order: 2; }
+  .studio-section.reverse .studio-visual { order: 1; }
+  .pro-badge {
+    display: inline-flex; align-items: center;
+    font-family: var(--mono); font-size: 10px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--black); background: var(--white);
+    padding: 3px 10px; line-height: 1; margin-bottom: 0;
+  }
+  .studio-text :global(.section-label) { display: flex; align-items: center; gap: 10px; line-height: 1; }
+  .studio-text :global(.section-title) { margin-bottom: 16px; }
+  .studio-desc {
+    font-size: 16px; color: var(--gray-400); line-height: 1.8;
+    max-width: 480px; margin-bottom: 32px;
+  }
+  .studio-features { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+  .studio-features li {
+    font-family: var(--mono); font-size: 12px; color: var(--gray-500);
+    padding: 6px 0; display: flex; align-items: center; gap: 8px;
+  }
+  .studio-features li::before {
+    content: ''; display: inline-block;
+    width: 6px; height: 6px; background: var(--white); flex-shrink: 0;
+  }
+  .studio-callout {
+    border: 1px solid rgba(255,255,255,0.1); padding: 20px 24px;
+    margin-top: 32px; background: rgba(255,255,255,0.02);
+  }
+  .studio-callout p {
+    font-family: var(--heading); font-size: 18px; font-weight: 500;
+    color: var(--gray-300); line-height: 1.5; font-style: italic;
+  }
+  .callout-source {
+    font-family: var(--mono); font-size: 9px; color: var(--gray-600);
+    margin-top: 8px; display: block; letter-spacing: 1px;
+  }
+  @media (max-width: 900px) {
+    .studio-section { grid-template-columns: 1fr; gap: 48px; padding: 60px 24px; }
+    .studio-section.reverse .studio-text { order: 1; }
+    .studio-section.reverse .studio-visual { order: 2; }
+    .studio-features { grid-template-columns: 1fr; }
+  }
+</style>

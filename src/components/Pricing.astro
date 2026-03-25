@@ -1,0 +1,79 @@
+---
+import { pricingTiers } from '../data/pricing';
+---
+
+<section class="pricing-section" id="pricing">
+  <div class="section-label reveal">Pricing</div>
+  <h2 class="section-title reveal" style="margin-left:auto;margin-right:auto;">Pay once. <em>Own it forever.</em></h2>
+  <div class="pricing-grid">
+    {pricingTiers.map(tier => (
+      <div class:list={['price-card', 'reveal', { featured: tier.featured }]}>
+        <div class="price-tier">{tier.tier}</div>
+        <div class="price-amount">{tier.amount}</div>
+        <div class="price-period">{tier.period}</div>
+        <ul class="price-features">
+          {tier.features.map(f => <li>{f}</li>)}
+        </ul>
+        <a href="#" class="price-btn">{tier.ctaLabel}</a>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .pricing-section { padding: 80px 40px; max-width: 1000px; margin: 0 auto; text-align: center; }
+  .pricing-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: rgba(255,255,255,0.1); margin-top: 64px; border: 1px solid rgba(255,255,255,0.1);
+  }
+  .price-card { background: var(--black); padding: 56px 40px; text-align: left; transition: background 0.3s; }
+  .price-card:hover { background: var(--gray-900); }
+  .price-card.featured { background: var(--white); color: var(--black); }
+  .price-card.featured:hover { background: var(--gray-100); }
+  .price-tier {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gray-500); margin-bottom: 16px;
+  }
+  .price-card.featured .price-tier { color: var(--gray-600); }
+  .price-amount {
+    font-family: var(--heading); font-size: 56px; font-weight: 500;
+    letter-spacing: -1px; margin-bottom: 4px;
+  }
+  .price-period { font-family: var(--mono); font-size: 12px; color: var(--gray-500); margin-bottom: 32px; }
+  .price-card.featured .price-period { color: var(--gray-600); }
+  .price-features { list-style: none; margin-bottom: 40px; }
+  .price-features li {
+    font-size: 14px; color: var(--gray-400); padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .price-card.featured .price-features li { color: var(--gray-600); border-color: rgba(0,0,0,0.06); }
+  .price-features li::before {
+    content: '\2192'; font-family: var(--mono); font-size: 12px; color: var(--gray-600);
+  }
+  .price-card.featured .price-features li::before { color: var(--gray-400); }
+  .price-btn {
+    display: inline-block; padding: 14px 32px;
+    font-family: var(--btn); font-size: 13px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    border: none; background: var(--white); color: var(--white);
+    cursor: pointer; transition: all 0.2s; text-decoration: none;
+    position: relative; isolation: isolate;
+  }
+  .price-btn::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--black); z-index: -1; transition: background 0.2s;
+    clip-path: polygon(
+      1px 7px, 7px 7px, 7px 1px,
+      calc(100% - 7px) 1px, calc(100% - 7px) 7px, calc(100% - 1px) 7px,
+      calc(100% - 1px) calc(100% - 7px), calc(100% - 7px) calc(100% - 7px), calc(100% - 7px) calc(100% - 1px),
+      7px calc(100% - 1px), 7px calc(100% - 7px), 1px calc(100% - 7px)
+    );
+  }
+  .price-btn:hover { color: var(--black); }
+  .price-btn:hover::before { background: var(--white); }
+  .price-card.featured .price-btn { background: var(--black); color: var(--white); }
+  .price-card.featured .price-btn::before { background: var(--gray-900); }
+  .price-card.featured .price-btn:hover { color: var(--white); }
+  .price-card.featured .price-btn:hover::before { background: var(--gray-700); }
+</style>

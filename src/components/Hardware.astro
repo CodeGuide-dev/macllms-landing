@@ -1,0 +1,130 @@
+---
+import MockTitlebar from './MockTitlebar.astro';
+---
+
+<section class="hardware-section" id="hardware">
+  <div>
+    <div class="section-label reveal">System Information</div>
+    <h2 class="section-title reveal" style="max-width:500px">See what models your Mac can handle &#8212; <em>before you download.</em></h2>
+    <p class="reveal" style="color:var(--gray-400); line-height:1.8; max-width:480px;">
+      MacLLMs reads your chip, RAM, and GPU on first launch. Every model in the Hub shows compatibility, memory needs, and speed estimates for your exact hardware. You'll never download something that won't run.
+    </p>
+  </div>
+  <div class="hw-visual reveal">
+    <MockTitlebar title="System Information" />
+    <div class="hw-profile">
+      <div class="hw-profile-item">
+        <div class="hw-profile-label">Chip</div>
+        <div class="hw-profile-value">M4 Pro</div>
+      </div>
+      <div class="hw-profile-item">
+        <div class="hw-profile-label">Memory</div>
+        <div class="hw-profile-value">48 GB</div>
+      </div>
+      <div class="hw-profile-item">
+        <div class="hw-profile-label">GPU Cores</div>
+        <div class="hw-profile-value">20</div>
+      </div>
+      <div class="hw-profile-item">
+        <div class="hw-profile-label">Neural Eng.</div>
+        <div class="hw-profile-value">16-core</div>
+      </div>
+    </div>
+    <div class="hw-body">
+      <div class="hw-memory-section">
+        <div class="hw-memory-header">
+          <span class="hw-memory-title">Unified Memory Map</span>
+          <span class="hw-memory-total">33.8 GB available</span>
+        </div>
+        <div class="hw-memory-bar">
+          <div class="hw-mem-seg hw-mem-system" style="width:16.7%"></div>
+          <div class="hw-mem-seg hw-mem-model" style="width:8.8%"></div>
+          <div class="hw-mem-seg hw-mem-kv" style="width:4.2%"></div>
+          <div class="hw-mem-seg hw-mem-free"></div>
+        </div>
+        <div class="hw-memory-legend">
+          <div class="hw-legend-item"><div class="hw-legend-dot sys"></div>macOS &#183; 8 GB</div>
+          <div class="hw-legend-item"><div class="hw-legend-dot model"></div>Qwen 3.5 4B &#183; 4.2 GB</div>
+          <div class="hw-legend-item"><div class="hw-legend-dot kv"></div>KV Cache &#183; 2 GB</div>
+          <div class="hw-legend-item"><div class="hw-legend-dot free"></div>Available &#183; 33.8 GB</div>
+        </div>
+      </div>
+      <div class="hw-perf-cards">
+        <div class="hw-perf-card">
+          <div class="hw-perf-value">35B Q4</div>
+          <div class="hw-perf-label">Max Comfortable Model</div>
+        </div>
+        <div class="hw-perf-card">
+          <div class="hw-perf-value">~52 tok/s</div>
+          <div class="hw-perf-label">Avg Inference Speed</div>
+        </div>
+        <div class="hw-perf-card">
+          <div class="hw-perf-value">38.2 GB</div>
+          <div class="hw-perf-label">Free for Models</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hardware-section {
+    padding: 80px 40px; max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .hw-visual { border: 1px solid rgba(255,255,255,0.1); background: var(--gray-900); overflow: hidden; }
+  .hw-profile {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .hw-profile-item {
+    background: var(--black); padding: 20px 16px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 76px;
+  }
+  .hw-profile-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gray-600); margin-bottom: 8px; line-height: 1;
+  }
+  .hw-profile-value {
+    font-family: var(--heading); font-size: 22px; font-weight: 500; color: var(--white); line-height: 1;
+  }
+  .hw-body { padding: 24px; }
+  .hw-memory-section { margin-bottom: 28px; }
+  .hw-memory-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+  .hw-memory-title { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-500); line-height: 1; }
+  .hw-memory-total { font-family: var(--mono); font-size: 10px; color: var(--gray-500); line-height: 1; }
+  .hw-memory-bar { height: 20px; display: flex; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+  .hw-mem-seg { height: 100%; }
+  .hw-mem-system { background: var(--gray-600); }
+  .hw-mem-model { background: var(--white); }
+  .hw-mem-kv { background: rgba(255,255,255,0.5); }
+  .hw-mem-free { background: var(--gray-800); flex: 1; }
+  .hw-memory-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; margin-top: 12px; }
+  .hw-legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 9px; color: var(--gray-500); letter-spacing: 0.5px; line-height: 1;
+  }
+  .hw-legend-dot { width: 8px; height: 8px; flex-shrink: 0; }
+  .hw-legend-dot.sys { background: var(--gray-600); }
+  .hw-legend-dot.model { background: var(--white); }
+  .hw-legend-dot.kv { background: rgba(255,255,255,0.5); }
+  .hw-legend-dot.free { background: var(--gray-800); border: 1px solid rgba(255,255,255,0.1); }
+  .hw-perf-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+  }
+  .hw-perf-card {
+    background: var(--black); padding: 20px 16px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; min-height: 76px;
+  }
+  .hw-perf-value { font-family: var(--heading); font-size: 24px; font-weight: 500; color: var(--white); line-height: 1; }
+  .hw-perf-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--gray-600); margin-top: 8px; line-height: 1;
+  }
+  @media (max-width: 600px) {
+    .hw-profile { grid-template-columns: repeat(2, 1fr); }
+    .hw-perf-cards { grid-template-columns: 1fr; }
+  }
+</style>

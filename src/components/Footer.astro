@@ -1,0 +1,94 @@
+---
+import { productLinks, connectLinks, bottomLinks } from '../data/footer';
+---
+
+<footer class="site-footer">
+  <div class="footer-upper">
+    <div class="footer-brand-col">
+      <a href="#" class="footer-logo" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">
+        <img src="/images/logo.png" alt="MacLLMs" />
+        <span>MacLLMs</span>
+      </a>
+      <p class="footer-tagline">Run open-source AI models privately on your Mac. No cloud. No subscriptions. Yours forever.</p>
+      <a href="#pricing" class="footer-dl-btn">Download for Mac</a>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Product</div>
+      <ul class="footer-links">
+        {productLinks.map(link => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Connect</div>
+      <ul class="footer-links">
+        {connectLinks.map(link => (
+          <li><a href={link.href} target={link.external ? '_blank' : undefined}>{link.label}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>&copy; 2026 MacLLMs. All rights reserved.</span>
+    <div class="footer-bottom-links">
+      {bottomLinks.map(link => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { border-top: 1px solid rgba(255,255,255,0.06); position: relative; z-index: 1; }
+  .footer-upper {
+    max-width: 1200px; margin: 0 auto;
+    padding: 64px 40px 48px;
+    display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px;
+  }
+  .footer-logo { display: flex; align-items: center; gap: 6px; margin-bottom: 16px; text-decoration: none; }
+  .footer-logo img { width: 36px; height: 36px; image-rendering: pixelated; }
+  .footer-logo span { font-family: var(--heading); font-size: 20px; font-weight: 500; color: var(--white); }
+  .footer-tagline {
+    font-family: var(--sans); font-size: 13px; color: var(--gray-500);
+    line-height: 1.6; max-width: 260px; margin-bottom: 16px;
+  }
+  .footer-dl-btn {
+    display: inline-block; margin-top: 4px;
+    padding: 10px 24px;
+    font-family: var(--btn); font-size: 11px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: var(--white); border: none;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .footer-col-title {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gray-500); margin-bottom: 20px; line-height: 1;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-links a {
+    font-family: var(--sans); font-size: 13px; color: var(--gray-500);
+    text-decoration: none; transition: color 0.2s; line-height: 1;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto;
+    padding: 20px 40px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--mono); font-size: 11px; color: var(--gray-700);
+  }
+  .footer-bottom-links { display: flex; gap: 24px; }
+  .footer-bottom-links a {
+    font-family: var(--mono); font-size: 11px; color: var(--gray-600);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-bottom-links a:hover { color: var(--white); }
+  @media (max-width: 900px) {
+    .footer-upper { grid-template-columns: 1fr; gap: 36px; padding: 48px 24px 36px; }
+    .footer-bottom { padding: 16px 24px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>

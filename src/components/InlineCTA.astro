@@ -1,0 +1,55 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  hint: string;
+  variant: 'filled' | 'outlined';
+}
+
+const { href, label, hint, variant } = Astro.props;
+---
+
+<div class="inline-cta reveal">
+  <a href={href} class={variant === 'filled' ? 'cta-filled' : 'cta-outlined'}>{label}</a>
+  <span class="inline-cta-hint">{hint}</span>
+</div>
+
+<style>
+  .inline-cta {
+    text-align: center;
+    padding: 12px 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .inline-cta a {
+    display: inline-block;
+    padding: 14px 36px;
+    font-family: var(--btn);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s, color 0.2s;
+  }
+  .inline-cta :global(.cta-filled) {
+    background: var(--white);
+    color: var(--black);
+    border: none;
+  }
+  .inline-cta :global(.cta-filled):hover {
+    transform: translateY(-2px);
+  }
+  .inline-cta :global(.cta-outlined) {
+    color: var(--white);
+    border: none;
+  }
+  .inline-cta-hint {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gray-600);
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+  }
+</style>

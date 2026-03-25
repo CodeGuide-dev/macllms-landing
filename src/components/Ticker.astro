@@ -1,0 +1,51 @@
+---
+import { tickerModels } from '../data/ticker';
+---
+
+<div class="ticker-wrap">
+  <div class="ticker" id="ticker">
+    <div class="ticker-set">
+      {tickerModels.map(model => (
+        <><span>{model}</span><span class="dot">&middot;</span></>
+      ))}
+    </div>
+    <div class="ticker-set">
+      {tickerModels.map(model => (
+        <><span>{model}</span><span class="dot">&middot;</span></>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .ticker-wrap {
+    overflow: hidden; border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06); padding: 18px 0; background: rgba(255,255,255,0.01);
+    position: relative;
+  }
+  .ticker {
+    display: flex; gap: 0; white-space: nowrap; width: max-content;
+    animation: ticker-scroll linear infinite;
+  }
+  .ticker-set {
+    display: flex; gap: 0; flex-shrink: 0;
+  }
+  .ticker-set span {
+    font-family: var(--mono); font-size: 13px; color: var(--gray-500);
+    letter-spacing: 2px; text-transform: uppercase; padding: 0 30px;
+  }
+  .ticker-set span.dot { padding: 0 0; color: var(--gray-700); }
+</style>
+
+<script>
+  const ticker = document.getElementById('ticker');
+  if (ticker) {
+    const firstSet = ticker.querySelector('.ticker-set');
+    if (firstSet) {
+      const setWidth = (firstSet as HTMLElement).offsetWidth;
+      const pxPerSec = 60;
+      const duration = setWidth / pxPerSec;
+      ticker.style.animationDuration = duration + 's';
+    }
+  }
+</script>

@@ -1,0 +1,98 @@
+---
+import { models } from '../data/models';
+import ModelCard from './ModelCard.astro';
+import MockTitlebar from './MockTitlebar.astro';
+---
+
+<section class="modelhub-section" id="models">
+  <div class="modelhub-intro">
+    <div class="section-label reveal">Model Studio</div>
+    <h2 class="section-title reveal">50,000+ models available.<br><em>1-click download. Start your workflow.</em></h2>
+    <p class="reveal">
+      The full HuggingFace catalog, searchable inside MacLLMs. Search any model, download and load it &#8212; no terminal, no config, no commands.
+    </p>
+    <div class="modelhub-stats reveal">
+      <div class="modelhub-stat">
+        <div class="modelhub-stat-value">50,000+</div>
+        <div class="modelhub-stat-label">Models Available</div>
+      </div>
+      <div class="modelhub-stat">
+        <div class="modelhub-stat-value">1-Click</div>
+        <div class="modelhub-stat-label">Download</div>
+      </div>
+      <div class="modelhub-stat">
+        <div class="modelhub-stat-value">1-Click</div>
+        <div class="modelhub-stat-label">Load &amp; Run</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modelhub-window reveal">
+    <MockTitlebar title="Model Studio" />
+    <div class="modelhub-search">
+      <span class="modelhub-search-icon">&#9906;</span>
+      <span>Search models, providers, or tasks...</span>
+      <span class="shortcut">&#8984;K</span>
+    </div>
+    <div class="modelhub-grid">
+      {models.map(model => (
+        <ModelCard model={model} />
+      ))}
+    </div>
+    <div class="modelhub-footer">
+      <span>Showing 8 of 50,000+ models</span>
+      <a href="#">Browse full catalog &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .modelhub-section { padding: 80px 40px 60px; max-width: 1200px; margin: 0 auto; }
+  .modelhub-intro { text-align: center; margin-bottom: 48px; }
+  .modelhub-intro :global(.section-title) { margin-left: auto; margin-right: auto; max-width: 800px; margin-bottom: 16px; }
+  .modelhub-intro p { font-size: 17px; color: var(--gray-400); line-height: 1.7; max-width: 600px; margin: 0 auto; }
+  .modelhub-stats { display: flex; justify-content: center; gap: 48px; margin-top: 36px; flex-wrap: wrap; }
+  .modelhub-stat { text-align: center; }
+  .modelhub-stat-value {
+    font-family: var(--heading); font-size: 36px; font-weight: 500;
+    color: var(--white); letter-spacing: -0.5px;
+  }
+  .modelhub-stat-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gray-500); margin-top: 4px;
+  }
+  .modelhub-window { border: 1px solid rgba(255,255,255,0.1); background: var(--gray-900); overflow: hidden; }
+  .modelhub-search {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.06); background: var(--black);
+  }
+  .modelhub-search-icon { font-family: var(--mono); font-size: 14px; color: var(--gray-600); }
+  .modelhub-search span { font-family: var(--mono); font-size: 13px; color: var(--gray-600); }
+  .modelhub-search .shortcut {
+    margin-left: auto; font-family: var(--mono); font-size: 10px; color: var(--gray-700);
+    border: 1px solid rgba(255,255,255,0.08); padding: 2px 8px; letter-spacing: 1px;
+  }
+  .modelhub-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: rgba(255,255,255,0.04); padding: 1px;
+  }
+  .modelhub-footer {
+    padding: 16px 24px; border-top: 1px solid rgba(255,255,255,0.04);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .modelhub-footer span {
+    font-family: var(--mono); font-size: 11px; color: var(--gray-600); letter-spacing: 0.5px;
+  }
+  .modelhub-footer a {
+    font-family: var(--mono); font-size: 11px; color: var(--gray-400);
+    text-decoration: none; letter-spacing: 0.5px; transition: color 0.2s;
+  }
+  .modelhub-footer a:hover { color: var(--white); }
+  @media (max-width: 1100px) {
+    .modelhub-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .modelhub-grid { grid-template-columns: 1fr; }
+    .modelhub-stats { gap: 24px; }
+  }
+</style>

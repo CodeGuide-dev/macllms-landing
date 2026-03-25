@@ -1,0 +1,26 @@
+---
+import { features } from '../data/features';
+import FeatureCard from './FeatureCard.astro';
+---
+
+<section class="value-section" id="features">
+  <div class="section-label reveal">What's Inside</div>
+  <h2 class="section-title reveal">It's ChatGPT and Claude app <em>but private.</em></h2>
+  <div class="features-grid">
+    {features.map(feature => (
+      <FeatureCard
+        title={feature.title}
+        description={feature.description}
+        iconSvg={feature.iconSvg}
+      />
+    ))}
+  </div>
+</section>
+
+<style>
+  .value-section { padding: 80px 40px; max-width: 1200px; margin: 0 auto; }
+  .features-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06);
+  }
+</style>

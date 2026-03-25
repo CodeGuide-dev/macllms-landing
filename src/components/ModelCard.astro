@@ -1,0 +1,118 @@
+---
+import type { Model } from '../data/models';
+
+interface Props {
+  model: Model;
+}
+
+const { model } = Astro.props;
+
+const actionClass = model.action === 'running' ? 'model-action running'
+  : model.action === 'downloaded' ? 'model-action downloaded'
+  : model.action === 'disabled' ? 'model-action'
+  : 'model-action';
+
+const disabledStyle = model.action === 'disabled'
+  ? 'border-color:var(--gray-800);color:var(--gray-600);cursor:not-allowed;'
+  : undefined;
+---
+
+<div class="model-card">
+  <div class="model-card-top">
+    <div class="model-initial"><Fragment set:html={model.iconSvg} /></div>
+    <div class:list={['model-compat', { ready: model.compatible }]}>{model.compatLabel}</div>
+  </div>
+  <div class="model-provider">{model.provider}</div>
+  <div class="model-name">{model.name}</div>
+  <div class="model-stats">
+    <div class="model-stat-item"><span class="stat-label">Params</span><span class="stat-value">{model.stats.params}</span></div>
+    <div class="model-stat-item"><span class="stat-label">Quant</span><span class="stat-value">{model.stats.quant}</span></div>
+    <div class="model-stat-item"><span class="stat-label">RAM</span><span class="stat-value">{model.stats.ram}</span></div>
+    <div class="model-stat-item"><span class="stat-label">Size</span><span class="stat-value">{model.stats.size}</span></div>
+  </div>
+  <div class="model-downloads">
+    <div class="model-dl-spark"><Fragment set:html={model.downloads.sparklineSvg} /></div>
+    <div class="model-dl-info">
+      <span class="model-dl-count">{model.downloads.count}</span>
+      <span class="model-dl-label">Downloads / mo</span>
+    </div>
+  </div>
+  <button class={actionClass} style={disabledStyle}>{model.actionLabel}</button>
+</div>
+
+<style>
+  .model-card {
+    background: var(--black);
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .model-card:hover { background: var(--gray-900); }
+  .model-card-top {
+    display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px;
+  }
+  .model-initial { width: 34px; height: 34px; flex-shrink: 0; }
+  .model-initial :global(svg) { width: 34px; height: 34px; display: block; }
+  .model-compat {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 1px;
+    text-transform: uppercase; padding: 2px 6px;
+    border: 1px solid rgba(255,255,255,0.15); color: var(--gray-400); white-space: nowrap;
+  }
+  .model-compat.ready { border-color: var(--white); color: var(--white); }
+  .model-provider {
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    color: var(--white); letter-spacing: 0.3px; margin-bottom: 2px;
+  }
+  .model-name {
+    font-family: var(--mono); font-size: 10px; color: var(--gray-500);
+    margin-bottom: 10px; line-height: 1.4;
+  }
+  .model-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; margin-bottom: 10px;
+  }
+  .model-stat-item {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.5px;
+  }
+  .model-stat-item :global(.stat-label) { color: var(--gray-600); text-transform: uppercase; }
+  .model-stat-item :global(.stat-value) { color: var(--gray-400); font-weight: 600; }
+  .model-downloads {
+    display: flex; align-items: center; gap: 8px; padding: 6px 0; margin-bottom: 10px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .model-dl-spark { flex-shrink: 0; }
+  .model-dl-spark :global(svg) { display: block; }
+  .model-dl-info { display: flex; flex-direction: column; min-width: 0; }
+  .model-dl-count {
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    color: var(--white); letter-spacing: 0.3px; line-height: 1;
+  }
+  .model-dl-label {
+    font-family: var(--mono); font-size: 8px; color: var(--gray-600);
+    letter-spacing: 1px; text-transform: uppercase; line-height: 1; margin-top: 2px;
+  }
+  .model-action {
+    margin-top: auto; display: flex; align-items: center; justify-content: center;
+    padding: 10px; font-family: var(--mono); font-size: 11px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    border: 1px solid var(--gray-700); color: var(--white);
+    background: transparent; cursor: pointer; transition: all 0.2s;
+  }
+  .model-action:hover {
+    background: var(--white); color: var(--black); border-color: var(--white);
+  }
+  .model-action.downloaded {
+    border-color: rgba(255,255,255,0.15); color: var(--gray-500);
+    background: transparent; cursor: default;
+  }
+  .model-action.downloaded:hover {
+    background: transparent; color: var(--gray-500); border-color: rgba(255,255,255,0.15);
+  }
+  .model-action.running {
+    border-color: var(--white); color: var(--black); background: var(--white);
+  }
+</style>

@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Ticker from '../components/Ticker.astro';
+import Features from '../components/Features.astro';
+import InlineCTA from '../components/InlineCTA.astro';
+import ModelHub from '../components/ModelHub.astro';
+import Hardware from '../components/Hardware.astro';
+import StudioSection from '../components/StudioSection.astro';
+import FineTuneDashboard from '../components/FineTuneDashboard.astro';
+import DatasetPipeline from '../components/DatasetPipeline.astro';
+import StudioDivider from '../components/StudioDivider.astro';
+import Pricing from '../components/Pricing.astro';
+import CTASection from '../components/CTASection.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="MacLLMs — Run LLMs on your Mac">
+  <Navbar />
+  <Hero />
+  <Ticker />
+  <Features />
+  <InlineCTA href="#pricing" label="Download for Mac" hint="$59 one-time · No subscription required" variant="filled" />
+  <ModelHub />
+  <InlineCTA href="#pricing" label="Start with 50,000+ Models" hint="Download any HuggingFace model in 1 click" variant="filled" />
+  <Hardware />
+  <InlineCTA href="#pricing" label="Download for Mac" hint="Works with M1, M2, M3, M4 · All chip variants" variant="filled" />
+  <StudioDivider />
+  <StudioSection
+    id="finetune"
+    label="Fine-Tune Studio"
+    showProBadge={true}
+    title="Fine-tune any model. <em>No terminal required.</em>"
+    description="Select a base model. Drop in your dataset. Hit train. Watch loss curves, checkpoints, and metrics update live — through a visual dashboard built for focus, not frustration."
+    features={["Real-time loss curves", "One-click model selection", "Epoch & LR tracking", "Checkpoint management", "LoRA & QLoRA support", "Export any format"]}
+  >
+    <FineTuneDashboard />
+  </StudioSection>
+  <InlineCTA href="#pricing" label="Fine-Tune Any LLM Model →" hint="Available with MacLLMs Pro · $199/year" variant="outlined" />
+  <StudioDivider />
+  <StudioSection
+    id="dataset"
+    label="Dataset Studio"
+    showProBadge={true}
+    title="Build Small Language Models <em>on your Data.</em>"
+    description="Turn raw documents into training-ready datasets. Generate synthetic instruction-response pairs, clean messy files, validate schemas, and export in ChatML, Alpaca, or ShareGPT format — all without writing a single script."
+    features={["Synthetic SFT generation", "Data cleaning pipeline", "Multi-format export", "Quality scoring", "Schema validation", "Deduplication engine"]}
+    reverse={true}
+    callout="A model trained on just 1,000 curated examples outperformed one trained on 52,000 — and matched GPT-4 in 43% of human evaluations."
+    calloutSource="SOURCE: LIMA PAPER · NEURIPS 2023"
+  >
+    <DatasetPipeline />
+  </StudioSection>
+  <InlineCTA href="#pricing" label="Get Started with Dataset Studio →" hint="Available with MacLLMs Pro · $199/year" variant="outlined" />
+  <StudioDivider />
+  <Pricing />
+  <CTASection />
+  <Footer />
+</BaseLayout>

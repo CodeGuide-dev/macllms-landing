@@ -1,0 +1,16 @@
+export const tickerModels = [
+  "Llama 4 Maverick",
+  "Qwen 3.5",
+  "DeepSeek V3.2",
+  "Mistral Small 3",
+  "Gemma 3n",
+  "Phi-4",
+  "Command R+",
+  "GLM-5",
+  "Kimi K2",
+  "MiniMax M2.5",
+  "Codestral",
+  "Nemotron Ultra",
+  "SmolLM3",
+  "Yi-Lightning",
+];

@@ -1,0 +1,39 @@
+---
+import { navLinks } from '../data/navigation';
+---
+
+<nav>
+  <a href="#" class="nav-logo" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">
+    <img src="/images/logo.png" alt="MacLLMs" />
+    <span>MacLLMs</span>
+  </a>
+  <ul class="nav-links">
+    {navLinks.map(link => (
+      <li><a href={link.href}>{link.label}</a></li>
+    ))}
+  </ul>
+  <a href="#pricing" class="nav-cta">Get MacLLMs</a>
+</nav>
+
+<style>
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    backdrop-filter: blur(20px);
+    background: rgba(0,0,0,0.5);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+  .nav-logo img { height: 36px; width: 36px; image-rendering: pixelated; }
+  .nav-logo span { font-family: var(--heading); font-size: 22px; font-weight: 500; color: var(--white); letter-spacing: 0.5px; }
+  .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 13px; color: var(--gray-400); text-decoration: none; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    padding: 10px 24px; background: var(--white); color: var(--black);
+    font-family: var(--btn); font-size: 13px; font-weight: 600; border: none; cursor: pointer;
+    letter-spacing: 0.5px; text-transform: uppercase; transition: transform 0.2s; text-decoration: none;
+  }
+  .nav-cta:hover { transform: translateY(-1px); }
+</style>

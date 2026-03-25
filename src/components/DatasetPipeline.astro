@@ -1,0 +1,109 @@
+---
+import MockTitlebar from './MockTitlebar.astro';
+---
+
+<div class="mock-pipeline">
+  <MockTitlebar title="Dataset Studio" />
+  <div class="pipeline-body">
+
+    <div class="pipeline-stage active">
+      <div class="pipeline-node">
+        <div class="pipeline-dot"></div>
+        <div class="pipeline-line"></div>
+      </div>
+      <div class="pipeline-content">
+        <h4>01 &#183; Ingest</h4>
+        <p>Import raw documents, CSVs, PDFs, or paste text. Or start from scratch with synthetic generation.</p>
+        <div class="pipeline-tags">
+          <span class="pipeline-tag">.csv</span>
+          <span class="pipeline-tag">.jsonl</span>
+          <span class="pipeline-tag">.pdf</span>
+          <span class="pipeline-tag">.txt</span>
+          <span class="pipeline-tag">paste</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pipeline-stage active">
+      <div class="pipeline-node">
+        <div class="pipeline-dot"></div>
+        <div class="pipeline-line"></div>
+      </div>
+      <div class="pipeline-content">
+        <h4>02 &#183; Clean &amp; Structure</h4>
+        <p>Deduplicate, fix encoding, normalize formats. Auto-detect and repair schema issues. Score quality per row.</p>
+      </div>
+    </div>
+
+    <div class="pipeline-stage active">
+      <div class="pipeline-node">
+        <div class="pipeline-dot"></div>
+        <div class="pipeline-line"></div>
+      </div>
+      <div class="pipeline-content">
+        <h4>03 &#183; Synthesize</h4>
+        <p>Generate instruction-response pairs using teacher models. Augment sparse datasets. Build SFT-ready conversations from raw knowledge.</p>
+      </div>
+    </div>
+
+    <div class="pipeline-stage active">
+      <div class="pipeline-node">
+        <div class="pipeline-dot"></div>
+        <div class="pipeline-line" style="background:transparent"></div>
+      </div>
+      <div class="pipeline-output">
+        <h4>04 &#183; Export</h4>
+        <p>Train-ready file</p>
+        <div class="pipeline-tags" style="justify-content:center; margin-top:12px;">
+          <span class="pipeline-tag">ChatML</span>
+          <span class="pipeline-tag">Alpaca</span>
+          <span class="pipeline-tag">ShareGPT</span>
+          <span class="pipeline-tag">JSONL</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .mock-pipeline { border: 1px solid rgba(255,255,255,0.1); background: var(--gray-900); overflow: hidden; }
+  .pipeline-body { padding: 24px; }
+  .pipeline-stage {
+    display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start;
+  }
+  .pipeline-node { display: flex; flex-direction: column; align-items: center; }
+  .pipeline-dot {
+    width: 12px; height: 12px; border: 2px solid var(--white);
+    background: var(--black); position: relative; z-index: 2;
+  }
+  .pipeline-stage.active .pipeline-dot { background: var(--white); }
+  .pipeline-line {
+    width: 2px; height: 100%; min-height: 50px;
+    background: rgba(255,255,255,0.1); margin-top: 0;
+  }
+  .pipeline-content {
+    border: 1px solid rgba(255,255,255,0.06); background: var(--black);
+    padding: 16px 20px; margin-bottom: 12px;
+  }
+  .pipeline-content h4 {
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 6px;
+  }
+  .pipeline-content p { font-size: 12px; color: var(--gray-500); line-height: 1.6; }
+  .pipeline-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .pipeline-tag {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 1px;
+    text-transform: uppercase; padding: 3px 8px;
+    border: 1px solid rgba(255,255,255,0.1); color: var(--gray-400);
+  }
+  .pipeline-output {
+    border: 1px solid var(--white); background: var(--black);
+    padding: 20px; text-align: center; margin-bottom: 12px;
+  }
+  .pipeline-output h4 {
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 4px;
+  }
+  .pipeline-output p { font-family: var(--heading); font-size: 22px; font-weight: 500; color: var(--white); }
+</style>

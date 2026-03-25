@@ -1,0 +1,113 @@
+/* ─── RESET & BASE ─── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --gray-100: #f5f5f5;
+  --gray-200: #e5e5e5;
+  --gray-300: #d4d4d4;
+  --gray-400: #a3a3a3;
+  --gray-500: #737373;
+  --gray-600: #525252;
+  --gray-700: #404040;
+  --gray-800: #262626;
+  --gray-900: #171717;
+  --mono: 'IBM Plex Mono', monospace;
+  --heading: 'EB Garamond', 'Apple Garamond', Garamond, 'Times New Roman', serif;
+  --sans: 'DM Sans', sans-serif;
+  --btn: 'Space Grotesk', sans-serif;
+}
+
+/* ─── PIXEL CORNERS (shared across 7+ selectors in 5+ components) ─── */
+.btn-primary, .btn-secondary, .nav-cta, .cta-filled, .cta-outlined,
+.price-btn, .footer-dl-btn {
+  clip-path: polygon(
+    0 6px, 6px 6px, 6px 0,
+    calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px,
+    100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px), calc(100% - 6px) 100%,
+    6px 100%, 6px calc(100% - 6px), 0 calc(100% - 6px)
+  );
+}
+
+/* Dark buttons: white pixel border via white bg + inner stair-clipped pseudo */
+.btn-secondary, .cta-outlined, .footer-dl-btn {
+  background: var(--white); border: none;
+  position: relative; isolation: isolate;
+}
+.btn-secondary::before, .cta-outlined::before, .footer-dl-btn::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--black); z-index: -1; transition: background 0.2s;
+  clip-path: polygon(
+    1px 7px, 7px 7px, 7px 1px,
+    calc(100% - 7px) 1px, calc(100% - 7px) 7px, calc(100% - 1px) 7px,
+    calc(100% - 1px) calc(100% - 7px), calc(100% - 7px) calc(100% - 7px), calc(100% - 7px) calc(100% - 1px),
+    7px calc(100% - 1px), 7px calc(100% - 7px), 1px calc(100% - 7px)
+  );
+}
+.btn-secondary:hover, .cta-outlined:hover, .footer-dl-btn:hover { color: var(--black); }
+.btn-secondary:hover::before, .cta-outlined:hover::before, .footer-dl-btn:hover::before { background: var(--white); }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.grid-bg {
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none; z-index: 0;
+}
+
+section { position: relative; z-index: 1; }
+
+/* ─── SHARED TYPOGRAPHY ─── */
+.section-label {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gray-500); margin-bottom: 20px;
+}
+
+.section-title {
+  font-family: var(--heading); font-size: clamp(36px, 5vw, 60px); font-weight: 400;
+  line-height: 1.15; max-width: 700px; letter-spacing: -0.3px; margin-bottom: 48px;
+}
+
+.section-title em { font-style: italic; font-weight: 400; color: var(--gray-400); }
+
+/* ─── REVEAL ANIMATION ─── */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── KEYFRAMES ─── */
+@keyframes ticker-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@keyframes progress-anim { 0% { width: 68%; } 50% { width: 78%; } 100% { width: 68%; } }
+
+/* ─── CROSS-COMPONENT RESPONSIVE ─── */
+@media (max-width: 900px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .features-grid { grid-template-columns: 1fr; }
+  .hardware-section { grid-template-columns: 1fr; gap: 48px; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .hero { padding: 120px 24px 60px; }
+  .hero h1 { white-space: normal; }
+  .value-section, .pricing-section, .cta-section { padding: 60px 24px; }
+}
