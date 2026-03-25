@@ -123,6 +123,9 @@ import MockTitlebar from './MockTitlebar.astro';
     font-family: var(--mono); font-size: 9px; letter-spacing: 1.5px;
     text-transform: uppercase; color: var(--gray-600); margin-top: 8px; line-height: 1;
   }
+  @media (max-width: 900px) {
+    .hardware-section { grid-template-columns: 1fr; gap: 48px; }
+  }
   @media (max-width: 600px) {
     .hw-profile { grid-template-columns: repeat(2, 1fr); }
     .hw-perf-cards { grid-template-columns: 1fr; }

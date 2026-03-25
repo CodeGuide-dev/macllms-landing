@@ -76,4 +76,8 @@ import { pricingTiers } from '../data/pricing';
   .price-card.featured .price-btn::before { background: var(--gray-900); }
   .price-card.featured .price-btn:hover { color: var(--white); }
   .price-card.featured .price-btn:hover::before { background: var(--gray-700); }
+  @media (max-width: 900px) {
+    .pricing-section { padding: 60px 24px; }
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
 </style>
