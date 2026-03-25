@@ -102,8 +102,6 @@ section { position: relative; z-index: 1; }
 
 /* ─── CROSS-COMPONENT RESPONSIVE ─── */
 @media (max-width: 900px) {
-  nav { padding: 16px 20px; }
-  .nav-links { display: none; }
   .features-grid { grid-template-columns: 1fr; }
   .hardware-section { grid-template-columns: 1fr; gap: 48px; }
   .pricing-grid { grid-template-columns: 1fr; }
