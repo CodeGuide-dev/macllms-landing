@@ -100,8 +100,3 @@ section { position: relative; z-index: 1; }
 @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 @keyframes progress-anim { 0% { width: 68%; } 50% { width: 78%; } 100% { width: 68%; } }
 
-/* ─── CROSS-COMPONENT RESPONSIVE ─── */
-@media (max-width: 900px) {
-  .hero { padding: 120px 24px 60px; }
-  .hero h1 { white-space: normal; }
-}
